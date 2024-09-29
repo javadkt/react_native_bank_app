@@ -1,5 +1,3 @@
-// src/interceptor.ts
-import {logoutAction} from './user/reducer'; // Import the logout action
 
 import {AxiosInstance, AxiosResponse, InternalAxiosRequestConfig} from 'axios';
 import store from '../store/store.ts';
@@ -9,9 +7,9 @@ const onRequest = (
   config: InternalAxiosRequestConfig,
 ): InternalAxiosRequestConfig => {
   const rootState = store.getState();
-  const globalState = rootState.user || {};
-  const tokens = globalState.token;
-  const token = tokens?.access?.token;
+  const globalState = rootState.userAccount || {};
+  const token = globalState.token;
+
 
   // Ensure headers is initialized
   if (!config.headers) {
@@ -45,13 +43,12 @@ const onResponseError = (error: any): Promise<any> => {
   if (error.response) {
     const {status, data} = error.response;
 
-    if (status === 401) {
-      // Unauthorized error handler
-      store.dispatch(logoutAction()); // Dispatch the logout action
+/*    if (status === 401) {
+       store.dispatch(logoutAction());
     } else if (data && data.status === 401) {
       // Unauthorized error handler
-      store.dispatch(logoutAction()); // Dispatch the logout action
-    }
+      store.dispatch(logoutAction());
+    }*/
   }
   return Promise.reject(error); // Re-throw the error to be handled later
 };

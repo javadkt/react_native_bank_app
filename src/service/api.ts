@@ -1,6 +1,7 @@
 import axios, {AxiosRequestConfig} from 'axios';
 import {setupInterceptorsTo} from '../utils/interceptors.ts';
 import {ApiConstants} from '../utils/apiConstants.ts';
+import {ApiResponse} from '../screens/userAccountCreation/types.ts';
 
 setupInterceptorsTo(axios);
 
@@ -8,16 +9,17 @@ const url = ApiConstants.BASE_URL;
 
 // Define the type for the API request parameters
 interface ApiRequestParams {
-  [key: string]: any; // Adjust this type based on your expected params structure
+  [key: string]: any;
 }
 
-export default async function api(
+export default async function api<T>(
   path: string,
   params: ApiRequestParams,
-  method: 'GET' | 'POST' | 'PUT' | 'DELETE', // Define allowed HTTP methods
-  headers: {[key: string]: string} = {}, // Optional additional headers
-  timeout: number = 5000, // Request timeout
-): Promise<any> {
+  method: 'GET' | 'POST' | 'PUT' | 'DELETE',
+  headers: {[key: string]: string} = {},
+  timeout: number = 5000,
+): Promise<ApiResponse<T>> {
+  // Ensure this is a promise of ApiResponse<T>
   const fullUrl = `${url}${path}`;
 
   if (__DEV__) {
@@ -27,20 +29,22 @@ export default async function api(
   const config: AxiosRequestConfig = {
     method,
     url: fullUrl,
-    data: params,
+    data: method === 'GET' ? undefined : params,
     headers,
     timeout,
   };
 
   try {
-    let res = await axios(config);
-    if (res) {
-      return res.data;
-    } else {
-      throw new Error('Invalid Response');
-    }
+    const res = await axios(config);
+
+    return {
+      success: res.data.success,
+      status: res.data.status,
+      message: res.data.message,
+      data: res.data.data, // Assuming this is the structure of your API response
+    } as ApiResponse<T>;
   } catch (error) {
     console.error('Error connecting to server:', error);
-    throw error; // Re-throw the error to be caught by the caller
+    throw error; // Re-throw the error for the caller to handle
   }
 }

@@ -10,9 +10,10 @@ export interface User {
 
 // Define the state interface for the user account slice
 interface UserAccountState {
-  userData: User | null;       // User data or null if not logged in
-  isLoading: boolean;           // Loading state for async tasks
-  error: string | null;         // Error messages
+  userData: User | null; // User data or null if not logged in
+  isLoading: boolean; // Loading state for async tasks
+  error: string | null; // Error messages
+  token: string | null; // Error messages
 }
 
 // Initial state
@@ -20,6 +21,7 @@ const initialState: UserAccountState = {
   userData: null,
   isLoading: false,
   error: null,
+  token: null
 };
 
 // Create the slice
@@ -27,22 +29,23 @@ const userAccountSlice = createSlice({
   name: 'userAccount',
   initialState,
   reducers: {
-    createUserAccountRequest(state) {
-      state.isLoading = true;       // Set loading to true when account creation is initiated
-      state.error = null;           // Clear previous error
+    createUserAccountRequest: (state) => {
+      state.isLoading = true; // Set loading to true
+      state.error = null; // Clear previous errors
     },
-    createUserAccountSuccess(state, action: PayloadAction<User>) {
-      state.userData = action.payload; // Set user data from the payload
-      state.isLoading = false;       // Set loading to false after successful account creation
+    createUserAccountSuccess: (state, action: PayloadAction<User>) => {
+      state.isLoading = false; // Set loading to false
+      state.userData = action.payload; // Set user data
+      state.error = null; // Clear errors
     },
-    createUserAccountFailure(state, action: PayloadAction<string>) {
-      state.isLoading = false;      // Set loading to false on failure
-      state.error = action.payload;  // Set error message
+    createUserAccountFailure: (state, action: PayloadAction<string>) => {
+      state.isLoading = false; // Set loading to false
+      state.error = action.payload; // Set the error message
     },
-    resetUserAccount(state) {
-      state.userData = null;         // Reset user data
-      state.isLoading = false;       // Reset loading state
-      state.error = null;            // Reset error state
+    resetAccount: (state) => {
+      state.userData = null; // Reset user data
+      state.isLoading = false; // Reset loading state
+      state.error = null; // Reset error state
     },
   },
 });
@@ -52,7 +55,7 @@ export const {
   createUserAccountRequest,
   createUserAccountSuccess,
   createUserAccountFailure,
-  resetUserAccount,
+  resetAccount,
 } = userAccountSlice.actions;
 
 // Export the reducer

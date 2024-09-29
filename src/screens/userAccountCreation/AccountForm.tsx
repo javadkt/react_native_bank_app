@@ -2,17 +2,15 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { createUserAccount } from '../../store/userAccount/userAccountSlice'; // Action to create user account
 
 const AccountForm: React.FC = () => {
-  const dispatch = useDispatch();
-  const [name, setName] = useState('');
+   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = () => {
+/*  const handleSubmit = () => {
     dispatch(createUserAccount({ name, email, password })); // Dispatch the action with form data
-  };
+  };*/
 
   return (
     <View>
@@ -33,7 +31,7 @@ const AccountForm: React.FC = () => {
         onChangeText={setPassword}
         secureTextEntry
       />
-      <Button title="Create Account" onPress={handleSubmit} />
+     {/* <Button title="Create Account" onPress={handleSubmit} />*/}
     </View>
   );
 };
