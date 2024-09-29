@@ -1,8 +1,9 @@
-// App.tsx
-import React from 'react';
+
 import { Provider } from 'react-redux';
-import Routes from './src/routes/Routes.tsx';
-import store from './src/store/store.ts';
+import store from './src/store/store';
+import Routes from './src/routes/Routes';
+import "react-native-devsettings";
+
 
 const App = () => {
   return (
