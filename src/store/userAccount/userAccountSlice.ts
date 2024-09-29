@@ -1,5 +1,5 @@
 // src/store/userAccount/userAccountSlice.ts
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 // Define the User interface to represent user data
 export interface User {
@@ -8,12 +8,21 @@ export interface User {
   email: string;
 }
 
-// Define the state interface for the user account slice
 interface UserAccountState {
-  userData: User | null; // User data or null if not logged in
-  isLoading: boolean; // Loading state for async tasks
-  error: string | null; // Error messages
-  token: string | null; // Error messages
+  userData: User | null;
+  isLoading: boolean;
+  error: string | null;
+  token: string | null;
+  form: {
+    name: string;
+    email: string;
+    password: string;
+    errors: {
+      name?: string;
+      email?: string;
+      password?: string;
+    };
+  };
 }
 
 // Initial state
@@ -21,7 +30,13 @@ const initialState: UserAccountState = {
   userData: null,
   isLoading: false,
   error: null,
-  token: null
+  token: null,
+  form: {
+    name: '',
+    email: '',
+    password: '',
+    errors: {},
+  },
 };
 
 // Create the slice
@@ -29,7 +44,7 @@ const userAccountSlice = createSlice({
   name: 'userAccount',
   initialState,
   reducers: {
-    createUserAccountRequest: (state) => {
+    createUserAccountRequest: state => {
       state.isLoading = true; // Set loading to true
       state.error = null; // Clear previous errors
     },
@@ -42,10 +57,21 @@ const userAccountSlice = createSlice({
       state.isLoading = false; // Set loading to false
       state.error = action.payload; // Set the error message
     },
-    resetAccount: (state) => {
+    resetAccount: state => {
       state.userData = null; // Reset user data
       state.isLoading = false; // Reset loading state
       state.error = null; // Reset error state
+    },
+    updateFormField: (state, action: PayloadAction<{ field: keyof UserAccountState['form']; value: string }>) => {
+      const { field, value } = action.payload;
+      state.form[field] = value;
+    },
+
+    setFormErrors: (
+      state,
+      action: PayloadAction<UserAccountState['form']['errors']>,
+    ) => {
+      state.form.errors = action.payload;
     },
   },
 });
@@ -56,6 +82,8 @@ export const {
   createUserAccountSuccess,
   createUserAccountFailure,
   resetAccount,
+  updateFormField,
+  setFormErrors
 } = userAccountSlice.actions;
 
 // Export the reducer
