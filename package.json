@@ -49,10 +49,23 @@
   "jest": {
     "preset": "react-native",
     "transform": {
-      "^.+\\.js$": "babel-jest"
+      "^.+\\.jsx?$": "babel-jest",
+      "^.+\\.tsx?$": "babel-jest"
     },
     "setupFiles": [
       "./node_modules/react-native-gesture-handler/jestSetup.js"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "ts",
+      "tsx",
+      "json",
+      "node"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/build/"
     ]
   },
   "engines": {
