@@ -5,31 +5,31 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   logo: {
-    height: 115, // Adjust this value to scale down
-    resizeMode: 'contain', // Ensures the image maintains aspect ratio
+    height: 115,
+    resizeMode: 'contain',
     alignSelf: 'center',
   },
   title: {
-    fontSize: 22, // Increased font size
+    fontSize: 22,
     fontWeight: 'bold',
     textAlign: 'justify',
-    marginBottom: 16, // Increased spacing
+    marginBottom: 16,
     color: '#000',
   },
   checkmarkIcon: {
-    width: 20, // Adjust size as needed
+    width: 20,
     height: 20,
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderWidth: 2, // Thicker border
+    borderWidth: 2,
     borderColor: '#ccc',
     borderRadius: 8,
     paddingLeft: 10,
     paddingRight: 10,
-    marginBottom: 22, // Increased spacing
-    height: 54, // Increased height
+    marginBottom: 22,
+    height: 54,
   },
   icon: {
     width: 20,
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
   checked: {
-    backgroundColor: '#000', // Change color when checked
+    backgroundColor: '#000',
   },
   redText: {
     color: 'red',

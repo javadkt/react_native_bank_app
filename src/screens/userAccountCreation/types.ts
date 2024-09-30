@@ -23,3 +23,11 @@ export type RootStackParamList = {
   FailurePage: undefined; // No parameters for the FailurePage
   // Add other routes here
 };
+
+
+export interface SignupResponse {
+  id: number;
+  loginId: string;
+  password: string; // Consider whether you really need to handle this securely
+  email: string;
+}

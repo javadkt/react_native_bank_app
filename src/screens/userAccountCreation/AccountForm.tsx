@@ -16,9 +16,9 @@ import googlIcon from '../../../assets/images/google.png';
 import email from '../../../assets/images/email.png';
 import lock from '../../../assets/images/lock.png';
 import rak from '../../../assets/images/rak_icon.png';
-import visibilityIcon from '../../../assets/images/visibility.png'; // Assuming this is the eye icon for visibility
-import visibilityOffIcon from '../../../assets/images/visibility_off.png'; // Assuming this is the eye-off icon for hiding
-import check from '../../../assets/images/check.png'; // Assuming this is the eye-off icon for hiding
+import visibilityIcon from '../../../assets/images/visibility.png';
+import visibilityOffIcon from '../../../assets/images/visibility_off.png';
+import check from '../../../assets/images/check.png';
 import {RootState} from '../../store/store.ts';
 import {
   createUserAccountRequest,
@@ -40,7 +40,6 @@ const AccountForm: React.FC = () => {
   const [isChecked, setIsChecked] = useState(true);
   const [snackbarVisible, setSnackbarVisible] = useState(false);
 
-  // Hardcode user data for testing
   useEffect(() => {
     const hardcodedUserData = {
       name: 'javadkt',
@@ -78,7 +77,6 @@ const AccountForm: React.FC = () => {
     }
 
     if (Object.keys(newErrors).length > 0) {
-      // Dispatch the new errors
       dispatch(setFormErrors(newErrors));
     } else {
       dispatch(setFormErrors({}));
@@ -104,17 +102,11 @@ const AccountForm: React.FC = () => {
       <SafeAreaView style={styles.safeArea} />
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
         <View style={styles.container}>
-          <Image
-            source={rak}
-            style={styles.logo} // Use the imported image here
-          />
+          <Image source={rak} style={styles.logo} />
           <Text style={styles.title}>Create Account</Text>
 
           <View style={styles.inputContainer}>
-            <Image
-              source={personImage} // Use the imported image here
-              style={styles.icon}
-            />
+            <Image source={personImage} style={styles.icon} />
             <TextInput
               style={[styles.input, form.errors.name && styles.errorInput]}
               placeholder="Full Name"
@@ -130,10 +122,7 @@ const AccountForm: React.FC = () => {
           )}
 
           <View style={styles.inputContainer}>
-            <Image
-              source={email} // Use the imported image here
-              style={styles.icon}
-            />
+            <Image source={email} style={styles.icon} />
             <TextInput
               style={[styles.input, form.errors.email && styles.errorInput]}
               placeholder="Email address"
@@ -150,10 +139,7 @@ const AccountForm: React.FC = () => {
           )}
 
           <View style={styles.inputContainer}>
-            <Image
-              source={lock} // Use the imported image here
-              style={styles.icon}
-            />
+            <Image source={lock} style={styles.icon} />
             <TextInput
               style={[styles.input, form.errors.password && styles.errorInput]}
               placeholder="Password"
@@ -168,7 +154,7 @@ const AccountForm: React.FC = () => {
               onPress={() => setIsPasswordVisible(!isPasswordVisible)}>
               <Image
                 source={isPasswordVisible ? visibilityIcon : visibilityOffIcon}
-                style={styles.icon} // Use the same icon style
+                style={styles.icon}
               />
             </TouchableOpacity>
           </View>

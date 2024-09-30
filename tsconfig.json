@@ -4,5 +4,11 @@
     "src/**/*",
     "images.d.ts"
     // Include your declaration file here
-  ]
+  ],
+  "compilerOptions": {
+    "types": [
+      "jest",
+      "node"
+    ]
+  }
 }
