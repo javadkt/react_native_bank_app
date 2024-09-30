@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -37,8 +37,23 @@ const AccountForm: React.FC = () => {
   );
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(true);
   const [snackbarVisible, setSnackbarVisible] = useState(false);
+
+  // Hardcode user data for testing
+  useEffect(() => {
+    const hardcodedUserData = {
+      name: 'javadkt',
+      email: 'javadkt@gmail.com',
+      password: 'javadjavad',
+    };
+
+    dispatch(updateFormField({field: 'name', value: hardcodedUserData.name}));
+    dispatch(updateFormField({field: 'email', value: hardcodedUserData.email}));
+    dispatch(
+      updateFormField({field: 'password', value: hardcodedUserData.password}),
+    );
+  }, [dispatch]);
 
   const validateForm = () => {
     const newErrors: {[key: string]: string} = {};
@@ -76,19 +91,12 @@ const AccountForm: React.FC = () => {
   };
 
   const handleSignUp = () => {
-    dispatch(createUserAccountRequest());
-
-    // Simulate API call
-    setTimeout(() => {
-      // Replace this with actual API logic
-      const fakeUser = {
-        name: form.name,
-        email: form.email,
-        password: form.password,
-      };
-      //dispatch(createUserAccountSuccess(fakeUser));
-      Alert.alert('Sign-up successful!');
-    }, 1000);
+    const userData = {
+      name: form.name,
+      email: form.email,
+      password: form.password,
+    };
+    dispatch(createUserAccountRequest(userData));
   };
 
   return (

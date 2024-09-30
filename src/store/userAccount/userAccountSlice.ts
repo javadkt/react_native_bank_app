@@ -1,12 +1,6 @@
 // src/store/userAccount/userAccountSlice.ts
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-
-// Define the User interface to represent user data
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-}
+import {User} from '../../screens/userAccountCreation/types.ts';
 
 interface UserAccountState {
   userData: User | null;
@@ -44,9 +38,11 @@ const userAccountSlice = createSlice({
   name: 'userAccount',
   initialState,
   reducers: {
-    createUserAccountRequest: state => {
-      state.isLoading = true; // Set loading to true
-      state.error = null; // Clear previous errors
+    createUserAccountRequest: (
+      state,
+      action: PayloadAction<{name: string; email: string; password: string}>,
+    ) => {
+      state.isLoading = true;
     },
     createUserAccountSuccess: (state, action: PayloadAction<User>) => {
       state.isLoading = false; // Set loading to false
@@ -62,8 +58,14 @@ const userAccountSlice = createSlice({
       state.isLoading = false; // Reset loading state
       state.error = null; // Reset error state
     },
-    updateFormField: (state, action: PayloadAction<{ field: keyof UserAccountState['form']; value: string }>) => {
-      const { field, value } = action.payload;
+    updateFormField: (
+      state,
+      action: PayloadAction<{
+        field: keyof UserAccountState['form'];
+        value: string;
+      }>,
+    ) => {
+      const {field, value} = action.payload;
       state.form[field] = value;
     },
 
@@ -83,7 +85,7 @@ export const {
   createUserAccountFailure,
   resetAccount,
   updateFormField,
-  setFormErrors
+  setFormErrors,
 } = userAccountSlice.actions;
 
 // Export the reducer

@@ -4,9 +4,22 @@ export interface User {
   email: string;
 }
 
-export interface ApiResponse<T> {
+export type UserData = {
+  name: string;
+  email: string;
+  password: string;
+};
+
+export interface ApiResponse {
   success: boolean;
   status: number;
   message: string;
-  data: T;
+  data: User;
 }
+
+
+export type RootStackParamList = {
+  SignUp: undefined; // No parameters for the SignUp screen
+  FailurePage: undefined; // No parameters for the FailurePage
+  // Add other routes here
+};

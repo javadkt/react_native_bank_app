@@ -1,35 +1,37 @@
-import api from '../../service/api.ts';
-import {ApiConstants} from '../../utils/apiConstants.ts';
-import {User} from '../../screens/userAccountCreation/types.ts';
+// src/store/userAccount/userAccountSaga.ts
 import {call, put, takeLatest} from 'redux-saga/effects';
 import {
-  createUserAccountFailure,
   createUserAccountRequest,
-} from './userAccountSlice.ts';
+  createUserAccountFailure,
+} from './userAccountSlice';
+import {PayloadAction} from '@reduxjs/toolkit';
+import {User} from '../../screens/userAccountCreation/types.ts';
+import api from '../../service/apiService.ts';
+import {CommonActions} from '@react-navigation/native';
+import * as RootNavigation from "../rootNavigation";
+import {Alert} from 'react-native';
 
-function* handleCreateUserAccount(action: {
-  payload: User;
-}): Generator<any, void, unknown> {
+// Define the generator function return type
+function* handleUserSignUp(
+  action: PayloadAction<{name: string; email: string; password: string}>,
+): Generator {
   try {
-    const response = yield call(
-      api<User>, // Specify the expected response type
-      ApiConstants.CREATE_ACCOUNT,
-      action.payload,
-      'POST',
-    );
-    console.log(response);
-    /*    if (ApiResonse.success) {
-          yield put(createUserAccountSuccess(response.data));
-        } else {
-          yield put(createUserAccountFailure(response.message));
-        }*/
-  } catch (error: any) {
-    // Dispatch failure action with error message on failure
-    yield put(createUserAccountFailure(error.message));
-  }
+
+    //Alert.alert('Registration Success','Our representative will get in touch with you shortly');
+    const userData: User = action.payload;
+    const response = yield call(api.signup, userData);
+
+    //if (response?.status === 200) {
+    //RootNavigation.navigate('ResponseStatus');
+/*    yield put(
+      CommonActions.navigate({
+        name: 'ResponseStatus',
+      }),
+    );*/
+    // }
+  } catch (error) {}
 }
 
-// Watcher saga: listen for createUserAccountRequest actions
 export function* userAccountSaga() {
-  yield takeLatest(createUserAccountRequest, handleCreateUserAccount); // Use the action creator
+  yield takeLatest(createUserAccountRequest, handleUserSignUp); // Use the action creator
 }
