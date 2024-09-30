@@ -40,11 +40,11 @@ const AccountForm: React.FC = () => {
   const [isChecked, setIsChecked] = useState(true);
   const [snackbarVisible, setSnackbarVisible] = useState(false);
 
-  useEffect(() => {
+/*  useEffect(() => {
     const hardcodedUserData = {
-      name: 'javadkt',
-      email: 'javadkt@gmail.com',
-      password: 'javadjavad',
+      name: 'test',
+      email: 'test@gmail.com',
+      password: 'test',
     };
 
     dispatch(updateFormField({field: 'name', value: hardcodedUserData.name}));
@@ -52,7 +52,7 @@ const AccountForm: React.FC = () => {
     dispatch(
       updateFormField({field: 'password', value: hardcodedUserData.password}),
     );
-  }, [dispatch]);
+  }, [dispatch]);*/
 
   const validateForm = () => {
     const newErrors: {[key: string]: string} = {};
