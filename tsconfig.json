@@ -6,9 +6,24 @@
     // Include your declaration file here
   ],
   "compilerOptions": {
+    "target": "es2017",
     "types": [
-      "jest",
-      "node"
-    ]
-  }
+      "node",
+      "jest"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "baseUrl": ".",
+    "noFallthroughCasesInSwitch": true,
+    "outDir": "./dist"
+  },
+  "compileOnSave": true
 }

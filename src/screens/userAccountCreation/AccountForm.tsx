@@ -37,22 +37,22 @@ const AccountForm: React.FC = () => {
   );
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [isChecked, setIsChecked] = useState(true);
+  const [isChecked, setIsChecked] = useState(false);
   const [snackbarVisible, setSnackbarVisible] = useState(false);
 
-/*  useEffect(() => {
-    const hardcodedUserData = {
-      name: 'test',
-      email: 'test@gmail.com',
-      password: 'test',
-    };
+  /*  useEffect(() => {
+      const hardcodedUserData = {
+        name: 'test',
+        email: 'test@gmail.com',
+        password: 'test',
+      };
 
-    dispatch(updateFormField({field: 'name', value: hardcodedUserData.name}));
-    dispatch(updateFormField({field: 'email', value: hardcodedUserData.email}));
-    dispatch(
-      updateFormField({field: 'password', value: hardcodedUserData.password}),
-    );
-  }, [dispatch]);*/
+      dispatch(updateFormField({field: 'name', value: hardcodedUserData.name}));
+      dispatch(updateFormField({field: 'email', value: hardcodedUserData.email}));
+      dispatch(
+        updateFormField({field: 'password', value: hardcodedUserData.password}),
+      );
+    }, [dispatch]);*/
 
   const validateForm = () => {
     const newErrors: {[key: string]: string} = {};
